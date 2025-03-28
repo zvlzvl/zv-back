@@ -19,5 +19,6 @@ module.exports = {
     },
     removeOnlineUser: (socket_id) => {
         users = users.filter(x => x.socketId !== socket_id)
-    }
+    },
+
 }
