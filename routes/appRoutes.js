@@ -20,9 +20,10 @@ router.get("/profile/:username", userController.profile);
 router.post("/delete",userAuth, userController.delete);
 router.get("/favorite/:postId",userAuth, userController.favorite);
 
-router.get("/messages",userAuth, messageController.getMessages);
+router.get("/get-conversation-users",userAuth, messageController.getConversationUsers);
 router.post("/send-message",userAuth, messageController.addMessage);
 router.get("/delete-message/:messageId", userAuth, messageController.delete)
+router.get("/messages/:opponent", userAuth, messageController.getUserMessages);
 
 router.get("/posts", postController.getPosts);
 router.get("/post/:postId", postController.getPost);

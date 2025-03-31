@@ -4,6 +4,7 @@ const userSchema = require("../schemas/userSchema");
 const postSchema = require("../schemas/postSchema");
 const messageSchema = require("../schemas/messageSchema");
 
+
 module.exports = {
     getUser: async (req, res) => {
         const {userId} = req.params;
@@ -63,8 +64,7 @@ module.exports = {
     },
     changePassword: async (req, res) => {
         const {authUser, newPassword} = req.body;
-        const user = await userSchema.findOne({_id: authUser.id});
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+          const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         let updatedUser = await userSchema.findOneAndUpdate(
             {_id: authUser.id},
@@ -75,7 +75,6 @@ module.exports = {
         return res.status(200).json({
             message: "ok",
             user: updatedUser,
-            // user: {username: updatedUser.username, _id: updatedUser._id, image: updatedUser.image, favorites: updatedUser.favorites, token}
         });
     },
     register: async (req, res) => {
