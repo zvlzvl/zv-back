@@ -122,7 +122,7 @@ module.exports = {
             const opponentUsers = await getUsersChatOpponents(opponentId);
             const currentUser = usersOnline.getUser(opponentId);
             io.to(currentUser.socketId).emit("chatUsers", {chatUsers: opponentUsers});
-            io.to(currentUser.socketId).emit("deleteMessage", {conversation: userConversation});
+            io.to(currentUser.socketId).emit("deleteMessage", {conversation: userConversation, sender:authUser.id});
         }
         return res.status(200).json({chatUsers: myUsers, conversation: userConversation});
     },
