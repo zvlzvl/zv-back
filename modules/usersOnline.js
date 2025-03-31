@@ -9,8 +9,6 @@ module.exports = {
         return users;
     },
     userIsOnline: (user_id) => {
-        console.log("atejo" , user_id);
-        console.log(users);
         const foundUser = users.find(x => x.userId === user_id);
         return !!foundUser;
     },

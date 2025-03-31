@@ -110,7 +110,6 @@ module.exports = {
         const myUsers = await getUsersChatOpponents(authUser.id);
 
         const userExist = usersOnline.userIsOnline(opponentId);
-        console.log("is online", authUser.id, opponentId);
         const userConversation = await messageSchema.find({
             $or: [
                 {sender: authUser.id, getter: opponentId},
@@ -119,13 +118,11 @@ module.exports = {
         }).populate("sender", "username image").populate("getter", "username image");
 
 
-        console.log("2222")
-        console.log(userConversation)
         if (userExist) {
             const opponentUsers = await getUsersChatOpponents(opponentId);
             const currentUser = usersOnline.getUser(opponentId);
             io.to(currentUser.socketId).emit("chatUsers", {chatUsers: opponentUsers});
-            io.to(currentUser.socketId).emit("conversation", {conversation: userConversation});
+            io.to(currentUser.socketId).emit("deleteMessage", {conversation: userConversation});
         }
         return res.status(200).json({chatUsers: myUsers, conversation: userConversation});
     },
